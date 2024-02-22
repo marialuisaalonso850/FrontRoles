@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    min-height: 42vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.element-container {
+    width: 24rem;
+    border-radius: 0.5rem;
+    border-top-left-radius: 80px;  
+    border-bottom: 0.75rem solid; 
+    border-top: 0.75rem solid;   
+    background-color: #f0f0f0;  
+    padding: 1rem;
+}
+
+.bus{
+    display: flex;
+    justify-content: space-around;
+}
+.bus-container {
+    margin-top: 1rem; /* Equivalente a mt-4 */
+    display: grid;
+    width: 100%; /* Equivalente a w-full */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Equivalente a grid-cols-2 */
+    align-items: start; /* Equivalente a items-start */
+    gap: 2.5rem; /* Equivalente a gap-10 */
+}
+.card-bus{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem; /* Equivalente a gap-4 en Tailwind CSS */
+  }
+
+  .card {
+    border-radius: 0 0 1.5rem 1.5rem; /* Equivalente a round-r-xl round-l-xl */
+    display: flex;
+    height: 3.5rem; /* Equivalente a h-14 */
+    width: 3.5rem; /* Equivalente a w-14 */
+    cursor: pointer;
+    align-items: center; /* Equivalente a items-center */
+    justify-content: center; /* Equivalente a justify-center */
+    border-top-left-radius: 1.5rem; /* Equivalente a rounded-t-xl */
+    background-color: #48bb78; /* Equivalente a bg-green-400 */
+    color: #fff; /* Equivalente a text-white */
+    font-size: 1.125rem; /* Equivalente a text-lg */
+    font-weight: 600; /* Equivalente a font-semibold */
+  }
+  
+  .container {
+    position: relative;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .button {
+    margin-top: 10px;
+  }
+  
+  
+  

@@ -1,0 +1,36 @@
+
+.home {
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 1280px) {
+  .home{
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  /* Medium devices and up */
+  .first {
+    grid-column: span 5;
+  }
+}
+
+.first {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 5px;
+}
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

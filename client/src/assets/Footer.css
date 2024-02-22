@@ -1,0 +1,112 @@
+/* Footer.css */
+
+.footer {
+ 
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(90deg, rgba(27,77,166,1) 66%, rgba(42,5,69,1) 91%);
+  color: #fff;
+  padding: 25px 20px;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32%;
+}
+
+.footer img{
+  width: 37%;
+}
+
+.icons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.icon{
+  width: 30%;
+}
+
+.icon2{
+  width: 100%;
+  height: 100%;
+}
+
+.infop{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+}
+
+.a-icon{
+
+filter: invert(100%);
+width: 35%;
+height: 35%;
+}
+
+.b-icon{
+  filter: invert(100%);
+  width: 80px;
+  height: 50px;
+
+}
+
+.info1{
+font-weight: 100;
+width: 45%;
+text-align: start;
+}
+
+.contactanos{
+font-weight: 400;
+}
+
+.footer-logo {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.footer-social {
+  margin-top: 20px;
+  display: flex;
+  gap: 6px;
+  width: 90%;
+}
+
+.footer-social a {
+  
+  width: 30%;
+  height: 100%;
+  text-decoration: none;
+  
+}
+
+/* Add more styling as needed */
+  

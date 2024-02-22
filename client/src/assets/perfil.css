@@ -1,0 +1,35 @@
+.perfil-formulario {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .perfil-formulario h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .perfil-formulario label {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .perfil-formulario input,
+  .perfil-formulario button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+
+  .perfil-formulario button {
+    background-color: #15297c;
+    color: white;
+    cursor: pointer;
+  }
+
+  .imagen-circular {
+    border-radius: 50%;
+    max-width: 100%;
+    margin-top: 10px;
+  }

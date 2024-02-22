@@ -1,0 +1,84 @@
+/* parqueadero.css */
+
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+.encabezado-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+
+.label-hora {
+  display: block;
+  margin-bottom: 10px;
+}
+
+
+.botones {
+  display: flex;
+  gap: 10px;
+}
+
+
+.puestos-disponibles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.puesto {
+  flex: 0 0 calc(33.33% - 20px);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.puesto img {
+  width: 100%;
+  height: auto;
+  max-height: 100px;
+  object-fit: cover;
+}
+
+.puesto p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+}
+
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal button {
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+  
