@@ -15,7 +15,7 @@ import Post from '../src/pages/post/Post';
 import Posts from '../src/pages/posts/Posts';//./pages/posts/Posts
 import Puestos from '../src/routes/puestos';//./routes/puestos
 import PostInfo from '../src/pages/posts/PostsInfo';//./pages/posts/PostsInfo
-import Reserva from '../src/routes/Reserva';//./routes/Reserva
+
 import Reservas from '../src/routes/Reservas';//./routes/Reservas
 
 const App = () => {
@@ -29,7 +29,6 @@ const App = () => {
           <Route path="/post/:id" element={<Post />} />
           <Route path="/post/:id/info" element={<PostInfo />} />
           <Route path="/reservas" element={<Reservas />} />
-          <Route path="/reserva/:id" element={<Reserva />} />
           <Route path="/puestos" element={<Puestos />} />
           <Route path="/" element={<Home />} />
           <Route path="/perfil" element={<Perfil />} />

@@ -3,11 +3,11 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
 import Mapa from "../../js/Mapa";
-import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
 // import "../../assets/posts.css";//../../assets/posts.css
 import PortalLayout from "../../layout/PortalLayout";
-import Modal from "react-modal"; 
+
 
 const Posts = () => {
   const navigate = useNavigate();
@@ -115,10 +115,9 @@ const Posts = () => {
               <th>Descripción</th>
               <th>Latitud</th>
               <th>Longitud</th>
-              <th>Puestos</th>
               <th>Actualizacion</th>
               <th>Eliminacion</th>
-              <th>Reserva</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -128,7 +127,6 @@ const Posts = () => {
                 <td> {post.content} </td>
                 <td> {post.latitud} </td>
                 <td> {post.longitud} </td>
-                <td> {post.puestos} </td>
                 <td>
                   <button
                     onClick={() => navigate(`/post/${post._id}`)}
@@ -145,43 +143,11 @@ const Posts = () => {
                     Eliminar
                   </button>
                 </td>
-                <td>
-                  <button onClick={() => handleReservaClick(post)} className="btn btn-danger">
-                    Puestos
-                  </button>
-                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      <Modal
-          isOpen={modalOpen}
-          onRequestClose={() => setModalOpen(false)}
-          contentLabel="Reservar"
-          className="custom-modal-content"
-          overlayClassName="custom-modal-overlay"
-          
-        >
-          <button onClick={() => setModalOpen(false)} className="modal-boton"> Cerrar</button>
-          <h2>Estado de los Puestos:</h2>
-          <div style={{ display: "flex", flexWrap: "wrap" }} >
-            {renderButtons()}
-          </div >
-          <div>
-            <h3>Selecciona una fecha y hora:</h3>
-            <DatePicker
-              selected={selectedDate}
-              onChange={handleDateChange}
-              showTimeSelect
-              dateFormat="MMMM d, yyyy h:mm aa"
-            />
-          </div>
-          <Link to="/Reservas">
-            <button className="modal-boton">Reserva</button>
-          </Link>
-        </Modal>
       </PortalLayout>
     </div>
   );

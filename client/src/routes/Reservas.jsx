@@ -6,16 +6,12 @@ import { Link } from "react-router-dom";
 import {
   Button,
 } from 'reactstrap';
-import Puestos from "./puestos";
-import '../assets/Posts.css';
-import PortalLayout from "../layout/PortalLayout";
 
+import '../assets/Posts.css';
 
 const Reservas = () => {
   const navigate = useNavigate();
   const [reservas, setReservas] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  
 
 
   const fetchReservas = async () => {
@@ -27,50 +23,40 @@ const Reservas = () => {
     fetchReservas();
   }, []);
 
-
   const handleDelete = async (reserva) => {
     setReservas(reservas.filter((p) => p._id !== reserva._id));
-    await axios.delete(`${puestos.apiUrl}/${reserva._id}`);
+    await axios.delete(`$\{puestos.apiUrl}/${reserva._id} `);
   };
 
-
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+  
 
   return (
-         <PortalLayout>
     <div className="posts">
-  
       <div className="container">
-      <Link to="/Posts">
+        <Link to="/Posts">
           <Button color="primary">Regresar</Button>
         </Link>
-        <button onClick={() => navigate("/reserva/new")} className="btn btn-primary mb-4">
-          nueva reserva
-        </button>
+       
         
         <table className="table">
           <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>telefono</th>
-              <th>vehiculo</th>
-              <th>año</th>
-              <th>fecha</th>
-              <th>hora</th>
-              
+            <tr >
+              <th>fecha</th>              
+              <th>Tiempo</th>
+              <th>nombre</th>             
+              <th>numero</th>
+              <th>puesto</th>
+             
             </tr>
           </thead>
           <tbody>
             {reservas.map((reserva) => (
               <tr key={reserva._id}>
+                <td> {reserva.date} </td>
+                <td> {reserva.time} </td>
                 <td> {reserva.nombre} </td>
                 <td> {reserva.telefono} </td>
-                <td> {reserva.vehiculo} </td>
-                <td> {reserva.año} </td>
-                <td> {reserva.fecha} </td>
-                <td> {reserva.hora} </td>
+                <td> {reserva.puestos} </td>
                 
                 <td>
                   <button
@@ -82,7 +68,9 @@ const Reservas = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(reserva)}
+                    onClick={() => {
+                      handleDelete(reserva);
+                    }}
                     className="btn btn-danger"
                   >
                     cancelar reserva
@@ -91,28 +79,9 @@ const Reservas = () => {
               </tr>
             ))}
           </tbody>
-        
         </table>
-        <button onClick={toggleModal} className="btn btn-primary mb-4">
-          Reservar Asiento
-        </button>
       </div>
-      {showModal && (
-        <div className="modal-container">
-          <div className="modal-content">
-            <button className="close-button" onClick={toggleModal}>
-              Close
-            </button>
-            <Puestos />
-          </div>
-        </div>
-      )}
-   
     </div>
-      </PortalLayout>
-        
-      
-    
   );
 };
 

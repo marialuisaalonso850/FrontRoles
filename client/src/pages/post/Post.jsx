@@ -18,13 +18,19 @@ const Post = () => {
   });
 
   useEffect(() => {
-    if (!id) return;
-    const fetchPost = async () => {
-      const { data } = await axios.get(`${config.apiUrl}/${id}`);
-      setPost(data);
-    };
-    fetchPost();
-  }, [id]);
+    if (id !== "new") {
+      const fetchPost = async () => {
+        try {
+          const { data } = await axios.get(`${config.apiUrl}/${id}`);
+          setPost(data);
+        } catch (error) {
+          console.error("Error al obtener el parqueadero:", error);
+          navigate("/error"); // Redirige a una página de error en caso de error 500
+        }
+      };
+      fetchPost();
+    }
+  }, [id, navigate]);
 
   const handleChange = (e) => {
     const postClone = { ...post };
@@ -34,15 +40,50 @@ const Post = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (id) {
-      await axios.post(config.apiUrl, post);
-      return navigate('/Posts');
-    } else {
-      await axios.put(`${config.apiUrl}/${id}`, post);
-      return navigate('/Posts');
+  
+    // Validación de campos requeridos
+    if (!post.title || !post.content || !post.telefono || !post.latitud || !post.longitud || !post.puestos) {
+      alert('Por favor completa todos los campos obligatorios.');
+      return;
+    }
+  
+    // Validación de formato de teléfono
+    const telefonoPattern = /^\d{10}$/;
+    if (!telefonoPattern.test(post.telefono)) {
+      alert('Por favor ingresa un número de teléfono válido (10 dígitos sin espacios ni caracteres especiales).');
+      return;
+    }
+  
+    // Validación de tarifas
+    if (post.tarifaCarro < 0 || post.tarifaMoto < 0) {
+      alert('Por favor ingresa tarifas válidas (no negativas).');
+      return;
+    }
+
+    // Validación de longitud y latitud
+  if (post.latitud < -90 || post.latitud > 90 || post.longitud < -180 || post.longitud > 180) {
+    alert('Por favor ingresa valores válidos para la latitud (-90 a 90) y la longitud (-180 a 180).');
+    return;
+  }
+  
+     // Validación de tarifas
+  if (post.tarifaCarro < 0 || post.tarifaMoto < 0) {
+    alert('Por favor ingresa tarifas válidas (no negativas).');
+    return;
+  }
+  
+    // Envío del formulario si todas las validaciones son exitosas
+    try {
+      if ( id === "new") {
+        await axios.post(config.apiUrl, post);
+      } else {
+        await axios.put(`${config.apiUrl}/${id}`, post);
+      }
+      navigate("/Posts");
+    } catch (error) {
+      console.error("Error al guardar la reserva:", error);
     }
   };
-
   return (
     <div className="post__wrapper">
       <div className="container">
@@ -126,7 +167,7 @@ const Post = () => {
               onChange={handleChange}
             />
             <button onClick={handleSubmit} className="btn btn-primary">
-              {id ? 'Agregar' : 'Actualizar'}
+              {id === 'new' ? 'Agregar' : 'Actualizar'}
             </button>
           </form>
         </div>

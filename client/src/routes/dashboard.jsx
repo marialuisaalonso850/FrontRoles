@@ -6,11 +6,14 @@ import PortalLayout from '../layout/PortalLayout';
 import '../assets/dashboard.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Autenticacion/AutProvider';
+import Modal from 'react-modal'; // Import the Modal component
+import CalendarComponent from './calendarComponent'; // Import the CalendarComponent
 
 const Dashboard = () => {
   const { getUser } = useAuth();
   const [parqueaderos, setParqueaderos] = useState([]);
   const [rol, setRol] = useState("");
+  const [modalOpen, setModalOpen] = useState(false); // State to control modal opening
   const auth = useAuth();
 
   useEffect(() => {
@@ -68,14 +71,14 @@ const Dashboard = () => {
                   <td>{parqueadero.longitud}</td>
                   <td>{parqueadero.puestos}</td>
                   <td>
-                    <Link to={`/post/${parqueadero._id}/info`} className="btn btn-primary">
+                    <Link to={`/post/${parqueadero._id}/info`} className="btn btn-primary"> {/* Corrected path format */}
                       Info
                     </Link>
                   </td>
                   <td>
-                    <Link to="/Posts" className="btn btn-primary">
-                      puesto
-                    </Link>
+                    <button onClick={() => setModalOpen(true)} className="btn btn-primary">
+                      Reservar
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -83,6 +86,16 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
+      <Modal
+        isOpen={modalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        contentLabel="Reservar"
+        className="custom-modal-content"
+        overlayClassName="custom-modal-overlay"
+      >
+        <button onClick={() => setModalOpen(false)} className="modal-boton"> Cerrar</button>
+        <CalendarComponent />
+      </Modal>
     </PortalLayout>
   );
 }

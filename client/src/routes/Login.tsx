@@ -9,7 +9,7 @@ export default function Login() {
   const [errorResponse, setErrorResponse] = useState("");
   const goto = useNavigate();
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: { preventDefault: () => void; }) {
     e.preventDefault();
 
     // Validación de campos de entrada
@@ -81,3 +81,4 @@ export default function Login() {
     </DefaultLayout>
   );
 }
+
