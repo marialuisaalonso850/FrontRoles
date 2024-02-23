@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DefaultLayout from "../layout/DefaultLayout";
 import { API_URL } from "../Autenticacion/constanst";
@@ -9,7 +9,7 @@ export default function Login() {
   const [errorResponse, setErrorResponse] = useState("");
   const goto = useNavigate();
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: { preventDefault: () => void; }) {
     e.preventDefault();
 
     // Validación de campos de entrada
