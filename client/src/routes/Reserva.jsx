@@ -11,7 +11,7 @@ const Reserva = () => {
       nombre: "",
       telefono: "",
       vehiculo: "",
-      año: "",
+      ano: "",
       fecha: "",
       hora: "",
   });

@@ -1,7 +1,7 @@
 export interface AuthResponse{
     body: {
         user: User;
-        parqueadero: parqueadero;
+        parqueadero: Parqueadero;
         accessToken: string;
         refreshToken: string;
     };
@@ -21,8 +21,8 @@ export interface ExtendedAuthContext {
     getRefreshToken: () => string | null;
     getUser: () => User | undefined;
     signOut: () => void;
-    getParqueadero: () => parqueadero | undefined;
-    createParqueadero: (newParqueadero: parqueadero) => void;
+    getParqueadero: () => Parqueadero | undefined;
+    createParqueadero: (newParqueadero: Parqueadero) => void;
     role: string;
   }
 
@@ -32,7 +32,7 @@ export interface User{
     username: string;
     role: string;
 }
-export interface parqueadero{
+export interface Parqueadero{
     _id: string;
     title: string;
     content: string

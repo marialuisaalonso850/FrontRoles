@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import type { AccessTokenResponse, AuthResponse, parqueadero, User } from "../types/types";
+import type { AccessTokenResponse, AuthResponse, Parqueadero, User } from "../types/types";
 import { API_URL } from "../Autenticacion/constanst";
 
 // Definir el tipo de contexto extendido
@@ -10,8 +10,8 @@ interface ExtendedAuthContext {
   getRefreshToken: () => string | null;
   getUser: () => User | undefined;
   signOut: () => void;
-  getParqueadero: () => parqueadero | undefined;
-  saveParqueadero: (parqueaderoData: AuthResponse) => void;
+  getParqueadero: () => Parqueadero | undefined;
+  saveParqueadero: (parqueaderoData: Parqueadero) => void;
 }
 
 // Crear el contexto de autenticación
@@ -23,7 +23,7 @@ export const AuthContext = createContext<ExtendedAuthContext>({
   getUser: () => undefined,
   signOut: () => {},
   getParqueadero: () => undefined,
-  saveParqueadero: (_parqueaderoData: AuthResponse) => {},
+  saveParqueadero: (_parqueaderoData: Parqueadero) => {},
 });
 
 // Componente proveedor de autenticación
@@ -32,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [accessToken, setAccessToken] = useState<string>("");
   const [user, setUser] = useState<User | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  const [parqueadero, setParqueadero] = useState<parqueadero | undefined>();
+  const [parqueadero, setParqueadero] = useState<Parqueadero | undefined>();
 
   useEffect(() => {
     checkAuth();
@@ -91,7 +91,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function getParqueaderoInfo(accessToken: string) {
     try {
-      const response = await fetch(`${API_URL}/parqueadero-info`, {
+      const response = await fetch(`${API_URL}/parqueadero`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -122,6 +122,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const userInfo = await getUserInfo(newAccessToken);
         if (userInfo) {
           saveSessionInfo(userInfo.user, newAccessToken, storedRefreshToken, userInfo.role);
+          const parqueaderoInfo = await getParqueaderoInfo(newAccessToken);
+          if (parqueaderoInfo) {
+            saveParqueadero(parqueaderoInfo);
+          }
         }
       }
     }
@@ -160,8 +164,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
-  function saveParqueadero(parqueaderoData: AuthResponse): void {
-    setParqueadero(parqueaderoData.body.parqueadero);
+  function saveParqueadero(parqueaderoData: Parqueadero): void {
+    setParqueadero(parqueaderoData);
   }
 
   function getParqueadero() {
