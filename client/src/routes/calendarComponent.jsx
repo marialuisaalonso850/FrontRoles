@@ -29,7 +29,7 @@ const CalendarComponent = () => {
     // Al obtener la fecha, se debe cargar las horas reservadas para esa fecha
     const fetchReservedTimes = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/reserva?date=${date.toISOString().slice(0, 10)}`);
+        const response = await axios.get(`https://parqueaderorolesback.onrender.com/api/reserva?date=${date.toISOString().slice(0, 10)}`);
         const reservedTimes = response.data.map(reserva => reserva.time);
         setReservedTimes(reservedTimes);
       } catch (error) {
@@ -69,7 +69,7 @@ const CalendarComponent = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/reserva', reservationData);
+      const response = await axios.post('https://parqueaderorolesback.onrender.com/api/reserva', reservationData);
       console.log('Reserva creada:', response.data);
       navigate("/reservas");
     } catch (error) {
