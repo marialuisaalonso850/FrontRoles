@@ -72,17 +72,36 @@ const Post = () => {
     return;
   }
   
-    // Envío del formulario si todas las validaciones son exitosas
-    try {
-      if ( id === "new") {
-        await axios.post(config.apiUrl, post);
-      } else {
-        await axios.put(`${config.apiUrl}/${id}`, post);
+  try {
+    const response = await axios.get(config.apiUrl, {
+      params: {
+        title: post.title,
+        latitud: post.latitud,
+        longitud: post.longitud
       }
-      navigate("/Posts");
-    } catch (error) {
-      console.error("Error al guardar la reserva:", error);
+    });
+  
+    // Verificar si la respuesta contiene algún parqueadero con los mismos datos
+    const existingPost = response.data.find(existing => 
+      existing.title === post.title && existing.latitud === post.latitud && existing.longitud === post.longitud
+    );
+  
+    if (existingPost) {
+      alert('Ya existe un parqueadero con el mismo nombre y coordenadas.');
+      return;
     }
+  
+    // Envío del formulario si todas las validaciones son exitosas
+    if (id === "new") {
+      await axios.post(config.apiUrl, post);
+    } else {
+      await axios.put(`${config.apiUrl}/${id}`, post);
+    }
+    navigate("/Posts");
+  } catch (error) {
+    console.error("Error al guardar la reserva:", error);
+  }
+
   };
   return (
     <div className="post__wrapper">

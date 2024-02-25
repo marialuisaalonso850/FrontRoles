@@ -22,12 +22,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+}
+
+.botones-separar{
   gap: 30px;
 }
 
 .botones-separar button{
   background: linear-gradient(90deg, rgba(27,77,166,1) 66%, rgba(42,5,69,1) 91%);
   color: #fff;
+  
 }
 
 .btn-primary:hover {

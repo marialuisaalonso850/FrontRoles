@@ -100,12 +100,13 @@ const Posts = () => {
          <div className="intento">
             <h2>Crear Parqueaderos</h2>
             <div className="botones-separar">
-              <Link to="/Dashboard">
-                <button>Regresar</button>
-              </Link>
+          
+              <div>
               <button onClick={() => navigate("/post/new")}>
                 Nuevo parqueadero
               </button>
+              </div>
+              
             </div>
           </div>
         <table className="table">
@@ -117,7 +118,7 @@ const Posts = () => {
               <th>Longitud</th>
               <th>Actualizacion</th>
               <th>Eliminacion</th>
-             
+              <th>Reserva</th> 
             </tr>
           </thead>
           <tbody>
@@ -142,6 +143,14 @@ const Posts = () => {
                   >
                     Eliminar
                   </button>
+                </td>
+                <td>
+                  <Link
+                    to='/Reservas'
+                    className="btn btn-danger"
+                  >
+                    Reserva
+                  </Link>
                 </td>
               </tr>
             ))}
