@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../Autenticacion/constanst";
 import { useAuth } from "../Autenticacion/AutProvider";
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   const auth = useAuth();
-  const [role, setRole] = useState("");
-  const [errorResponse, setErrorResponse] = useState("");
+  // const [role, setRole] = useState("");
+  // const [errorResponse, setErrorResponse] = useState("");
   
   // useEffect(() => {
     
@@ -89,7 +89,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         </nav>
       </header>
 
-      {errorResponse && <div className="error-message">{errorResponse}</div>}
+{/*       {errorResponse && <div className="error-message">{errorResponse}</div>} */}
 
       <main>{children}</main>
     </>
