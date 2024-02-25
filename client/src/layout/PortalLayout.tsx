@@ -9,28 +9,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   const [, setErrorResponse] = useState("");
 
 
-  async function handleSignOut(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    try {
-      const response = await fetch(`${API_URL}/signout`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.getRefreshToken()}`
-        }
-      });
-
-     
-      
-      if (response.ok) {
-        auth.signOut();
-        window.location.href = "/";
-        
-      }
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error);
-    }
-  }
+  
 
   useEffect(() => {
     async function fetchUserRole() {
@@ -56,6 +35,30 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   
     fetchUserRole(); // Llamar a la función para obtener el rol del usuario al cargar el componente
   }, []);
+  
+
+  async function handleSignOut(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${API_URL}/signout`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.getRefreshToken()}`
+        }
+      });
+
+     
+      
+      if (response.ok) {
+        auth.signOut();
+        window.location.href = "/";
+        
+      }
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  }
 
   return (
     <>
