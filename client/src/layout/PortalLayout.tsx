@@ -7,31 +7,35 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   const auth = useAuth();
   const [role, setRole] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
+  
+  // useEffect(() => {
+    
+  // //   async function fetchUserRole() {
+      
+  // //     try {
+  // //       const response = await fetch(`${API_URL}/login`, {
+  // //         method: "GET",
+  // //         headers: {
+  // //           "Content-Type": "application/json",
+  // //           "Authorization": `Bearer ${localStorage.getItem("token")}`
+  // //         }
+  // //       });
 
-  useEffect(() => {
-    async function fetchUserRole() {
-      try {
-        const response = await fetch(`${API_URL}/login`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-          }
-        });
+  // //       if (response.ok) {
+  // //         const json = await response.json();
+  // //         setRole(json.role);
+  // //         console.log(json.role);
+          
+  // //       } else {
+  // //         setErrorResponse("Ocurrió un error al obtener el rol del usuario.");
+  // //       }
+  // //     } catch (error) {
+  // //       setErrorResponse("Hubo un problema de red. Inténtalo de nuevo más tarde.");
+  // //     }
+  // //   }
 
-        if (response.ok) {
-          const json = await response.json();
-          setRole(json.role);
-        } else {
-          setErrorResponse("Ocurrió un error al obtener el rol del usuario.");
-        }
-      } catch (error) {
-        setErrorResponse("Hubo un problema de red. Inténtalo de nuevo más tarde.");
-      }
-    }
-
-    fetchUserRole();
-  }, []);
+  // //   fetchUserRole();
+  // // }, []);
 
   async function handleSignOut(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -66,16 +70,16 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <li>
               <Link to="/Perfil">Perfil</Link>
             </li>
-            {role === "usuario" && (
+            {/* {role === "usuario" && ( */}
               <li>
                 <Link to="/Dashboard">Mapa navegacion</Link>
               </li>
-            )}
-            {role === "cliente" && (
+            {/* )} */}
+            {/* {role === "cliente" && ( */}
               <li>
                 <Link to="/Posts">Creacion parqueadero</Link>
               </li>
-            )}
+            {/* )} */}
             <li>
               <a href="/" onClick={handleSignOut}>
                 Salir
@@ -86,6 +90,11 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       </header>
 
       {errorResponse && <div className="error-message">{errorResponse}</div>}
+
+      <main>{children}</main>
+    </>
+  );
+}
 
       <main>{children}</main>
     </>
