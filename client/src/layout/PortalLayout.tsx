@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { API_URL } from "../Autenticacion/constanst";
 import { useAuth } from "../Autenticacion/AutProvider";
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   const auth = useAuth();
-  const [role, setRole] = useState(""); 
-  const [, setErrorResponse] = useState("");
-
-
-  
+  const [role, setRole] = useState("");
+  const [errorResponse, setErrorResponse] = useState("");
 
   useEffect(() => {
     async function fetchUserRole() {
@@ -18,13 +15,13 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}` // Añadido token de autorización
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
           }
         });
-  
+
         if (response.ok) {
           const json = await response.json();
-          setRole(json.role); // Actualizado el estado del rol
+          setRole(json.role);
         } else {
           setErrorResponse("Ocurrió un error al obtener el rol del usuario.");
         }
@@ -32,10 +29,9 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         setErrorResponse("Hubo un problema de red. Inténtalo de nuevo más tarde.");
       }
     }
-  
-    fetchUserRole(); // Llamar a la función para obtener el rol del usuario al cargar el componente
+
+    fetchUserRole();
   }, []);
-  
 
   async function handleSignOut(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -48,12 +44,9 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         }
       });
 
-     
-      
       if (response.ok) {
         auth.signOut();
         window.location.href = "/";
-        
       }
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
@@ -73,12 +66,12 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <li>
               <Link to="/Perfil">Perfil</Link>
             </li>
-            {role === "usuario" && ( // Mostrar el enlace "Mapa navegacion" solo si el usuario es un usuario
+            {role === "usuario" && (
               <li>
                 <Link to="/Dashboard">Mapa navegacion</Link>
               </li>
             )}
-            {role === "cliente" && ( // Mostrar el enlace "Creacion parqueadero" solo si el usuario es un cliente
+            {role === "cliente" && (
               <li>
                 <Link to="/Posts">Creacion parqueadero</Link>
               </li>
@@ -91,6 +84,8 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
           </ul>
         </nav>
       </header>
+
+      {errorResponse && <div className="error-message">{errorResponse}</div>}
 
       <main>{children}</main>
     </>
