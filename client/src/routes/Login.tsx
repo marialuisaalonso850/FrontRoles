@@ -31,16 +31,20 @@ export default function Login() {
       });
 
       const json = await response.json();
+      const userRol = json.user;
       
       if (response.ok) {
         // Almacenamiento seguro del token de acceso y el rol del usuario
         localStorage.setItem("token", json.token);
         
-        console.log(json.user);
+        if(userRol==="cliente"){
+          goto("/Posts")
+        }else{
+          goto("/dashboard");
+        }
         
-        
-        // Redirección después del inicio de sesión exitoso
-        goto("/dashboard");
+       
+      
       } else {
         // Manejo de errores en la respuesta del servidor
         setErrorResponse(json.error || "Ocurrió un error al iniciar sesión.");
