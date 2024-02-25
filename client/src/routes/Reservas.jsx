@@ -41,11 +41,14 @@ const Reservas = () => {
         <table className="table">
           <thead>
             <tr >
-              <th>fecha</th>              
+              <th>Fecha</th>              
               <th>Tiempo</th>
-              <th>nombre</th>             
-              <th>numero</th>
-              <th>puesto</th>
+              <th>Nombre</th>             
+              <th>Numero</th>
+              <th>Puesto</th>
+              <th>Actualizar</th>
+              <th>Eliminar</th>
+              <th>Salida</th>
              
             </tr>
           </thead>
@@ -74,6 +77,14 @@ const Reservas = () => {
                     className="btn btn-danger"
                   >
                     cancelar reserva
+                  </button>
+                </td>
+                <td>
+                  <button
+                   
+                    className="btn btn-danger"
+                  >
+                    salida de vehiculo
                   </button>
                 </td>
               </tr>
