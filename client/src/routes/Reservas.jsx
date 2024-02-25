@@ -33,7 +33,7 @@ const Reservas = () => {
   return (
     <div className="posts">
       <div className="container">
-        <Link to="/Posts">
+        <Link to="/Dashboard">
           <Button color="primary">Regresar</Button>
         </Link>
        
