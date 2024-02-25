@@ -214,10 +214,10 @@ label {
 
 input[type="button"],
 button {
-  background-color: rgb(192, 116, 220);
+  background:  #106083a4;
   background-position: bottom;
   padding: 10px;
-  border: 0;
+  box-shadow: 21px;
   min-width: 100px;
   border-radius: 5px;
   color: #000;
