@@ -1,11 +1,13 @@
-import React from "react";
-import { useAuth } from "../Autenticacion/AutProvider";
-import { Link  } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import { Link, } from "react-router-dom";
 import { API_URL } from "../Autenticacion/constanst";
+import { useAuth } from "../Autenticacion/AutProvider";
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   const auth = useAuth();
+  const [role, setRole] = useState(""); 
+  const [, setErrorResponse] = useState("");
+
 
   async function handleSignOut(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -18,14 +20,42 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         }
       });
 
+     
+      
       if (response.ok) {
         auth.signOut();
         window.location.href = "/";
+        
       }
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
   }
+
+  useEffect(() => {
+    async function fetchUserRole() {
+      try {
+        const response = await fetch(`${API_URL}/login`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}` // Añadido token de autorización
+          }
+        });
+  
+        if (response.ok) {
+          const json = await response.json();
+          setRole(json.role); // Actualizado el estado del rol
+        } else {
+          setErrorResponse("Ocurrió un error al obtener el rol del usuario.");
+        }
+      } catch (error) {
+        setErrorResponse("Hubo un problema de red. Inténtalo de nuevo más tarde.");
+      }
+    }
+  
+    fetchUserRole(); // Llamar a la función para obtener el rol del usuario al cargar el componente
+  }, []);
 
   return (
     <>
@@ -40,15 +70,17 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <li>
               <Link to="/Perfil">Perfil</Link>
             </li>
+            {role === "usuario" && ( // Mostrar el enlace "Mapa navegacion" solo si el usuario es un usuario
+              <li>
+                <Link to="/Dashboard">Mapa navegacion</Link>
+              </li>
+            )}
+            {role === "cliente" && ( // Mostrar el enlace "Creacion parqueadero" solo si el usuario es un cliente
+              <li>
+                <Link to="/Posts">Creacion parqueadero</Link>
+              </li>
+            )}
             <li>
-              <Link to="/Dashboard">Mapa navegacion</Link>
-            </li>
-            <li>
-              <Link to="/Posts">registrar Parqueadero</Link>
-            </li>
-
-            <li>
-              {/* Cambiar el enlace por un botón y agregar el controlador de eventos */}
               <a href="/" onClick={handleSignOut}>
                 Salir
               </a>
